@@ -1,5 +1,7 @@
-import inventoryRoutes from './inventory_routes';
+const inventoryRoutes = require('./inventory_routes');
+const shoppingRoutes = require("./shopping_routes");
 
-export default function(app,db){
+module.exports = function(app,db){
     inventoryRoutes(app,db);
+    shoppingRoutes(app,db);
 }

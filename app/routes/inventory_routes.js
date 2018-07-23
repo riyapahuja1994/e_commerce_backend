@@ -1,6 +1,6 @@
-import { ObjectID as ObjectId } from 'mongodb';
+var ObjectId = require('mongodb').ObjectID;
 
-export default function(app, db){
+module.exports = function(app, db){
 
     app.get('/inventory_products', (req,res) => {
         db.collection('product_inventory').find({}).toArray((err,result) => {

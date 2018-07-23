@@ -1,4 +1,4 @@
-import { ObjectID as ObjectId } from 'mongodb';
+var ObjectId = require('mongodb').ObjectID;
 
 module.exports = function(app, db){
 

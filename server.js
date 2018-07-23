@@ -1,8 +1,8 @@
-//all imports are in ES6 format
-import express from 'express';
-import { MongoClient } from 'mongodb';
-import bodyParser from 'body-parser';
-import { url } from './config/db';
+//all imports are in ES5 format as NodeJS does not support ES6 at the time of development of this project
+const express = require('express');
+const MongoClient = require('mongodb').MongoClient;
+const bodyParser = require('body-parser');
+const db = require('./config/db');
 
 const app = express();
 const port = 8000;
@@ -18,7 +18,7 @@ app.use(function(req,res,next){
 });
 
 //connect to database and start listening for HTTP requests
-MongoClient.connect(url, (err,database) => {
+MongoClient.connect(db.url, { useNewUrlParser: true },(err,database) => {
     if(err)
         return console.log(err);
     //Add the Database Name here and not collection name
