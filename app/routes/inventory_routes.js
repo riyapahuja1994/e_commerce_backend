@@ -16,9 +16,10 @@ module.exports = function(app, db){
         })
     })
 
-    app.get('/inventory_products/:id', (req,res) => {
-        const id = req.params.id ;
-        const queryParams = { '_id' : new ObjectId(id) };
+    app.get('/inventory_products/:product_id', (req,res) => {
+        console.log(req.params.product_id);
+        const id = req.params.product_id ;
+        const queryParams = { 'product_id' : (id) };
         db.collection('product_inventory').findOne(queryParams, (err,result) => {
             if(err)
             {
