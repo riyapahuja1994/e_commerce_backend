@@ -32,7 +32,7 @@ module.exports = function(app, db){
         })
     })
 
-    app.post('/inventory_products', (req, res) => {
+    app.post('/inventory_product', (req, res) => {
         let product = req.body;
         db.collection('product_inventory').insert(product, (err,result) => {
             if (err) { 
@@ -44,4 +44,31 @@ module.exports = function(app, db){
         })
     })
 
+    app.put('/inventory_product/:product_id', (req, res) => {
+        const id = req.params.product_id;
+        const queryParams = { 'product_id' : (id) };
+        let product = req.body;
+        db.collection('product_inventory').update(queryParams, product, (err, result) => {
+          if (err) { 
+            res.send({ 'error': 'An error occurred while updating the product' }); 
+          } else {
+            res.send(product);
+          }
+        });
+      });
+
+      app.delete('/inventory_product/:product_id', (req,res)=>{
+        const id = req.params.product_id;
+        const queryParams = { 'product_id' : (id) };
+        db.collection('product_inventory').remove(queryParams, (err,item)=>{
+          if(err)
+          { 
+            res.send({'error': 'An error occurred while deleting the product'});
+          }
+          else
+          {
+            res.send('Product ' + id + ' deleted!');
+          }
+        });
+      });
 }
